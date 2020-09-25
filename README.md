@@ -1,5 +1,11 @@
 # Requests IAMAuth
 
+[![pypi](https://img.shields.io/pypi/v/requests-iamauth?color=yellow&logo=python&logoColor=eee&style=flat-square)](https://pypi.org/project/requests-iamauth/)
+[![python](https://img.shields.io/pypi/pyversions/requests-iamauth?logo=python&logoColor=eee&style=flat-square)](https://pypi.org/project/requests-iamauth/)
+[![pytest](https://img.shields.io/github/workflow/status/amancevice/requests-iamauth/pytest?logo=github&style=flat-square)](https://github.com/amancevice/requests-iamauth/actions)
+[![coverage](https://img.shields.io/codeclimate/coverage/amancevice/requests-iamauth?logo=code-climate&style=flat-square)](https://codeclimate.com/github/amancevice/requests-iamauth/test_coverage)
+[![maintainability](https://img.shields.io/codeclimate/maintainability/amancevice/requests-iamauth?logo=code-climate&style=flat-square)](https://codeclimate.com/github/amancevice/requests-iamauth/maintainability)
+
 Use AWS SigV4 authorization with requests.
 
 Accessing an API secured with IAM authorization in AWS API Gateway can be tricky.
