@@ -1,17 +1,20 @@
 SDIST := dist/$(shell python setup.py --fullname).tar.gz
 
-$(SDIST): test
-	python setup.py sdist
-
-.PHONY: all clean test up upload
+.PHONY: all clean test upload
 
 all: $(SDIST)
 
 clean:
 	rm -rf dist
 
-test:
-	py.test
+test: coverage.xml
 
 upload: $(SDIST)
 	twine upload $<
+
+$(SDIST): coverage.xml
+	python setup.py sdist
+
+coverage.xml: $(shell find iamauth tests -name '*.py')
+	flake8 $^
+	pytest || (rm $@ ; exit 1)
