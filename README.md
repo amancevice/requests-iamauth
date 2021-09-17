@@ -28,3 +28,12 @@ session = requests.Session()
 session.auth = IAMAuth()
 session.get('https://abcdef0123.execute-api.us-east-2.amazonaws.com/my/api')
 ```
+
+Override the default boto3 session by passing a custom one into the constructor for `IAMAuth`:
+
+```python
+import boto3
+
+boto3_session = boto3.Session()
+session.auth = IAMAuth(boto3_session)
+```
