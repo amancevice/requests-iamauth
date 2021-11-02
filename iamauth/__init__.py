@@ -1,6 +1,8 @@
 """
 AWS IAM Authorizer.
 """
+from pkg_resources import (get_distribution, DistributionNotFound)
+
 import boto3
 import requests
 from botocore.auth import SigV4Auth
@@ -50,3 +52,16 @@ class IAMAuth(requests.auth.AuthBase):
 
         # Return prepared request
         return awsrequest.prepare()
+
+
+def _version():
+    """
+    Helper to get package version.
+    """
+    try:
+        return get_distribution(__name__).version
+    except DistributionNotFound:  # pragma: no cover
+        return None
+
+
+__version__ = _version()
