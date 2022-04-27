@@ -20,9 +20,10 @@ class IAMAuth(requests.auth.AuthBase):
     :Example:
 
     >>> IAMAuth()
-    >>> IAMAuth(boto3.Session(), 'execute-api')
+    >>> IAMAuth('execute-api')
+    >>> IAMAuth('execute-api', boto3.Session())
     """
-    def __init__(self, boto3_session=None, service_name='execute-api'):
+    def __init__(self, service_name='execute-api', boto3_session=None):
         self.boto3_session = boto3_session or boto3.Session()
         self.sigv4 = SigV4Auth(
             credentials=self.boto3_session.get_credentials(),

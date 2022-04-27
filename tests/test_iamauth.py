@@ -11,7 +11,7 @@ class TestIAMAuth:
             aws_secret_access_key='<secret>',
             region_name='us-east-2',
         )
-        self.subject = IAMAuth(self.boto3_session)
+        self.subject = IAMAuth(boto3_session=self.boto3_session)
 
     def test_call(self):
         req = requests.Request(
