@@ -35,5 +35,5 @@ Override the default boto3 session by passing a custom one into the constructor 
 import boto3
 
 boto3_session = boto3.Session()
-session.auth = IAMAuth(boto3_session)
+session.auth = IAMAuth(boto3_session=boto3_session)
 ```
