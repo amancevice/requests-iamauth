@@ -1,13 +1,13 @@
 """
 AWS IAM Authorizer.
 """
-from pkg_resources import (get_distribution, DistributionNotFound)
-
 import boto3
 import requests
 from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
-from botocore.compat import (parse_qsl, urlparse)
+from botocore.compat import parse_qsl, urlparse
+
+__version__ = "0.5.0"
 
 
 class IAMAuth(requests.auth.AuthBase):
@@ -23,7 +23,8 @@ class IAMAuth(requests.auth.AuthBase):
     >>> IAMAuth('execute-api')
     >>> IAMAuth('execute-api', boto3.Session())
     """
-    def __init__(self, service_name='execute-api', boto3_session=None):
+
+    def __init__(self, service_name="execute-api", boto3_session=None):
         self.boto3_session = boto3_session or boto3.Session()
         self.sigv4 = SigV4Auth(
             credentials=self.boto3_session.get_credentials(),
@@ -38,7 +39,7 @@ class IAMAuth(requests.auth.AuthBase):
         # Prepare AWS request
         awsrequest = AWSRequest(
             method=request.method,
-            url=f'{url.scheme}://{url.netloc}{url.path}',
+            url=f"{url.scheme}://{url.netloc}{url.path}",
             data=request.body,
             params=dict(parse_qsl(url.query)),
         )
@@ -53,16 +54,3 @@ class IAMAuth(requests.auth.AuthBase):
 
         # Return prepared request
         return awsrequest.prepare()
-
-
-def _version():
-    """
-    Helper to get package version.
-    """
-    try:
-        return get_distribution(__name__).version
-    except DistributionNotFound:  # pragma: no cover
-        return None
-
-
-__version__ = _version()

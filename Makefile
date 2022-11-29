@@ -1,27 +1,26 @@
-PYFILES := $(shell find iamauth tests -name '*.py')
-SDIST   := dist/$(shell python setup.py --fullname 2> /dev/null).tar.gz
+all: test build
 
-all: test
-
-build: $(SDIST)
+build: .venv
+	pipenv run flit build
 
 clean:
 	rm -rf dist
 
-test: | .venv
-	pipenv run pytest
+ipython:
+	pipenv run ipython
 
-upload: $(SDIST)
+publish: build test
 	git diff HEAD --quiet
-	pipenv run twine upload $<
+	pipenv run flit publish
 
-.PHONY: all build clean test upload
-
-$(SDIST): $(PYFILES) | .venv
+test: .venv
+	pipenv run black --check iamauth tests
 	pipenv run pytest
-	python setup.py sdist
 
-.venv: Pipfile
-	mkdir -p .venv
+.PHONY: all build clean ipython publish test
+
+Pipfile.lock: Pipfile
+.venv: Pipfile.lock
+	mkdir -p $@
 	pipenv install --dev
-	touch .venv
+	touch $@
