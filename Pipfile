@@ -5,9 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 black = "*"
+flit = "*"
 ipdb = "*"
 ipython = "*"
-flit = "*"
 pytest = "*"
 pytest-cov = "*"
 
