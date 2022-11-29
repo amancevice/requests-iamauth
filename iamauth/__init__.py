@@ -7,7 +7,7 @@ from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
 from botocore.compat import parse_qsl, urlparse
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 
 class IAMAuth(requests.auth.AuthBase):
