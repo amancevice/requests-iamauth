@@ -20,20 +20,64 @@ pip install requests-iamauth
 
 ## Usage
 
+### Signing Version 4
+
+AWS [sigv4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) is the current standard for signing requests bound for AWS services.
+
+Use `requests-iamauth` to as an authorizer for the `requests` Python library:
+
 ```python
 import requests
-from iamauth import IAMAuth
+from iamauth import Sigv4Auth
+
+sigv4 = Sigv4Auth(
+  service_name="execute-api",  # default
+)
 
 session = requests.Session()
-session.auth = IAMAuth()
+session.auth = sigv4
 session.get('https://abcdef0123.execute-api.us-east-2.amazonaws.com/my/api')
 ```
 
-Override the default boto3 session by passing a custom one into the constructor for `IAMAuth`:
+Override the default boto3 session by passing a custom one into the constructor for `Sigv4Auth`:
 
 ```python
 import boto3
 
-boto3_session = boto3.Session()
-session.auth = IAMAuth(boto3_session=boto3_session)
+sigv4 = Sigv4Auth(
+  boto3_session=boto3.Session(),
+)
+```
+
+### Signing Version 4a
+
+AWS [sigv4a](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) is an extension to the sigv4 signing process that enables signing requests bound for more than one region.
+
+> Note — at the time of this writing, the only API Gateway API type that appears to support sigv4 are REST APIs.
+
+Use `requests-iamauth` to as an authorizer for the `requests` Python library:
+
+
+```python
+import requests
+from iamauth import Sigv4aAuth
+
+sigv4a = Sigv4aAuth(
+  service="execute-api",  # default
+  region="*",             # default
+)
+
+session = requests.Session()
+session.auth = sigv4a
+session.get('https://abcdef0123.execute-api.us-east-2.amazonaws.com/my/api')
+```
+
+Override the default AWS credentials provider by passing a custom one into the constructor for `Sigv4aAuth`:
+
+```python
+from botocore.compat import awscrt
+
+sigv4a = Sigv4aAuth(
+  credentials_provider=awscrt.auth.AwsCredentialsProvider.new_default_chain(),
+)
 ```

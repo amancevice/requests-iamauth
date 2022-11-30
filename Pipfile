@@ -12,6 +12,7 @@ pytest = "*"
 pytest-cov = "*"
 
 [packages]
+awscrt = "*"
 boto3 = "*"
 requests = "*"
 

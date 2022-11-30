@@ -18,7 +18,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Topic :: Utilities",
 ]
-dependencies = ["boto3", "requests"]
+dependencies = ["awscrt", "boto3", "requests"]
 dynamic = ["version", "description"]
 license = {file = "LICENSE"}
 name = "iamauth"

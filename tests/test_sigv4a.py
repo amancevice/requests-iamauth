@@ -1,17 +1,17 @@
-import boto3
 import requests
+from botocore.compat import awscrt
 
-from iamauth import IAMAuth
+from iamauth import Sigv4aAuth
 
 
 class TestIAMAuth:
     def setup_method(self):
-        self.boto3_session = boto3.Session(
-            aws_access_key_id="<access>",
-            aws_secret_access_key="<secret>",
-            region_name="us-east-2",
+        credentials_provider = awscrt.auth.AwsCredentialsProvider.new_static(
+            access_key_id="<access-key>",
+            secret_access_key="<secret-key>",
+            session_token="<session-token>",
         )
-        self.subject = IAMAuth(boto3_session=self.boto3_session)
+        self.subject = Sigv4aAuth(credentials_provider=credentials_provider)
 
     def test_call(self):
         req = requests.Request(
