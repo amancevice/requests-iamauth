@@ -31,6 +31,9 @@ iamcurl = "iamauth:__main__"
 [project.urls]
 Home = "https://github.com/amancevice/requests-iamauth"
 
+[tool.flit.module]
+name = "iamauth"
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts    = "--cov iamauth --cov tests --cov-report term-missing --cov-report xml"
