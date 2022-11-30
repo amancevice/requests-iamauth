@@ -57,7 +57,6 @@ AWS [sigv4a](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.h
 
 Use `requests-iamauth` to as an authorizer for the `requests` Python library:
 
-
 ```python
 import requests
 from iamauth import Sigv4aAuth
