@@ -5,7 +5,7 @@ import boto3
 import requests
 from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
-from botocore.compat import parse_qsl, urlparse
+from botocore.compat import parse_qsl, urlsplit
 
 __version__ = "0.6.0"
 
@@ -20,8 +20,8 @@ class IAMAuth(requests.auth.AuthBase):
     :Example:
 
     >>> IAMAuth()
-    >>> IAMAuth('execute-api')
-    >>> IAMAuth('execute-api', boto3.Session())
+    >>> IAMAuth("execute-api")
+    >>> IAMAuth("execute-api", boto3.Session())
     """
 
     def __init__(self, service_name="execute-api", boto3_session=None):
@@ -34,7 +34,7 @@ class IAMAuth(requests.auth.AuthBase):
 
     def __call__(self, request):
         # Parse request URL
-        url = urlparse(request.url)
+        url = urlsplit(request.url)
 
         # Prepare AWS request
         awsrequest = AWSRequest(
