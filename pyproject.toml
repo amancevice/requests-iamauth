@@ -21,7 +21,7 @@ classifiers = [
 dependencies = ["awscrt", "boto3", "requests"]
 dynamic = ["version", "description"]
 license = {file = "LICENSE"}
-name = "iamauth"
+name = "requests-iamauth"
 requires-python = ">= 3.7"
 readme = "README.md"
 
