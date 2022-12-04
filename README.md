@@ -53,7 +53,7 @@ sigv4 = Sigv4Auth(
 
 AWS [sigv4a](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) is an extension to the sigv4 signing process that enables signing requests bound for more than one region.
 
-> Note — at the time of this writing, the only API Gateway API type that appears to support sigv4 are REST APIs.
+> Note — at the time of this writing, the only API Gateway API type that appears to support the new sigv4a are REST APIs.
 
 Use `requests-iamauth` to as an authorizer for the `requests` Python library:
 
