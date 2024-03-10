@@ -1,6 +1,7 @@
 """
 IAMAuth using Signatuve v4a signing process.
 """
+
 from io import BytesIO
 
 from botocore.awsrequest import AWSRequest
