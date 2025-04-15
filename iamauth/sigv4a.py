@@ -42,7 +42,7 @@ class Sigv4aAuth(AuthBase):
         # Prepare AWS request
         aws_url = f"{url.scheme}://{url.netloc}{url.path}"
         aws_headers = dict(request.headers)
-        aws_params = dict(parse_qsl(url.query))
+        aws_params = parse_qsl(url.query)
         aws_request = AWSRequest(
             method=request.method,
             url=aws_url,

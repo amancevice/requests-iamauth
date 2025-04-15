@@ -36,7 +36,7 @@ class Sigv4Auth(AuthBase):
             method=request.method,
             url=f"{url.scheme}://{url.netloc}{url.path}",
             data=request.body,
-            params=dict(parse_qsl(url.query)),
+            params=parse_qsl(url.query),
         )
 
         # Sign request
